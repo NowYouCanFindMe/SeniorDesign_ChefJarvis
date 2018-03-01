@@ -40,6 +40,8 @@ def btnClick(servoId):
 btn1 = Button(f2, padx=16, pady=16, bd=8, fg="black", text="OK", command=btnClick(0))
 btn1.grid(row=0, column=1)
 ## Servo 2
+btn2 = Button(f2, padx=16, pady=16, bd=8, fg="black", text="OK", command=btnClick(0))
+btn1.grid(row=0, column=1)
 ## Servo 3
 ## Servo 4
 ## Servo 5
