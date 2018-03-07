@@ -1,4 +1,5 @@
-from Tkinter import* 
+#from Tkinter import* 
+from tkinter import*
 import random 
 import time
 
