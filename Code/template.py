@@ -1,18 +1,22 @@
 from Adafruit_PWM_Servo_Driver import PWM
-import time 
+import time
 from math import sqrt
 
-# Set Address 
-pwm = PWM(0x40)
 
+"""
+Initialize
+"""
+# Set Address
+pwm = PWM(0x40)
+pwm.setPWMFreq(60)
 # ****** Setup IK variables ******
 PI = 3.14159265
 
-servoMin  = 150
+servoMin = 150
 servomax = 600
 
 """
-Define Lengths of Segments 
+Define Lengths of Segments
 """
 ShoulderLength = 9.5
 ElbowLength = 9.0
@@ -22,23 +26,32 @@ FingerLength = 5.8
 """
 Define Names
 """
-Hypot, Slope, CirclePointX, CirclePointY
-x1 = 28 
+Hypot = 0
+Slope = 0
+CirclePointX = 0
+CirclePointY = 0
+x1 = 28
 y1 = 9.0
+"""
+Origin Point Start
+"""
+
 x2 = 0.0
 y2 = 0.0
-A, B, C,
-PosXAnswer  #positive X portion of Quadratic Equation.
-PosYAnswer   #positive Y portion of Qudratic Equation.
-NegXAnswer   #negative X portion of Quadratic Equation.
-NegYAnswer   #negative Y portion of Quadratic Equation.
-Angle_A      #Angle located at origin (0,0).
-Angle_A_Temp #Second 1/2 of Angle located at origin (0,0).Shoulder servo setting.
-Angle_B      #Elbow servo setting.
+A, B, C = 0.0, 0.0, 0.0
+PosXAnswer  # positive X portion of Quadratic Equation.
+PosYAnswer  # positive Y portion of Qudratic Equation.
+NegXAnswer  # negative X portion of Quadratic Equation.
+NegYAnswer  # negative Y portion of Quadratic Equation.
+Angle_A  # Angle located at origin (0,0).
+# Second 1/2 of Angle located at origin (0,0).Shoulder servo setting.
+Angle_A_Temp
+Angle_B  # Elbow servo setting.
 Angle_C
 
-def setup():
-    pwm.setPWMFreq(60)
+
+
+  
    """
    Pin Names 
 
@@ -47,8 +60,24 @@ def setup():
    Pin 4  Elbow
    Pin 6  Shoulder
    Pin 8  Base
+   Pin 12 BaseRotator
+   Pin 15 Gripper
    """
 
+def setup():
+
+    pinFinger = 0
+    pinWrist = 2
+    pinElbow = 4
+    pinShoulder = 6
+    pinBase = 8
+    pinBaseRotate = 12
+    pinGripper = 15
+
+    """
+    Object to Control the servo
+    Servo BasePan, GripTilt, ShoulderTilt, ElbowTilt, WristTitle
+    """"
 loop():
     x1 =3 
     y1 = 1
@@ -94,19 +123,22 @@ if Angle_A < 35:
 
 if not isnan(Angle_A)
     print(Angle_A)
-    #ShoulderTilt.write(Angle_A)
+    # ShoulderTilt.write(Angle_A)
     delay(1000)
 
-if not isnan(Angle_B) { 
+if not isnan(Angle_B) 
 
-CurrentAngle = ElbowTilt.read();
+    CurrentAngle = ElbowTilt.read();
 
-if (Angle_B > CurrentAngle) {
-    Serial.print(CurrentAngle);
-    Serial.print(" < ");
-    Serial.println(Angle_B);
-    for (i = CurrentAngle; i < Angle_B; i = i + 1) //if Angle_B > CurrentAngle.
-    {
+    if (Angle_B > CurrentAngle):
+      
+        print(CurrentAngle);
+        print("< \n", Angle_B)
+        Serial.print(" < ");
+        Serial.println(Angle_B);
+        for i in range( CurrentAngle, Angle_B)
+        for (i = CurrentAngle; i < Angle_B; i = i + 1): //if Angle_B > CurrentAngle.
+        {
 
     ElbowTilt.write(i);
     delay(5);
@@ -115,19 +147,19 @@ if (Angle_B > CurrentAngle) {
 }//end if Angle_B > CurrentAngle.
 
 def reset_servos():
-    #ShoulderTilt.write(65);//was 50.60.35.55
+    # ShoulderTilt.write(65);//was 50.60.35.55
     delay(2000);
 
 
-    #ElbowTilt.write(90 );//was 60.70.50.90.40.90
+    # ElbowTilt.write(90 );//was 60.70.50.90.40.90
     delay(500);
 
 
-    #WristTilt.write(90);//was 60.50.40
+    # WristTilt.write(90);//was 60.50.40
     delay(500);
 
 
-    #GripTilt.write(90); //was 40,35,90,20,60.10.45
+    # GripTilt.write(90); //was 40,35,90,20,60.10.45
     delay(500);
 # pwm.setPWMFreq(60)
 # while(True):
@@ -146,3 +178,6 @@ def setServoPulse(channel, pulse):
     pulse *= 1000
     pulse /= pulseLength
     pwm.setPWM(channel, 0, pulse)
+
+
+
