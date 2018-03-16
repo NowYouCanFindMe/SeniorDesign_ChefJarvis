@@ -15,6 +15,13 @@ PI = 3.14159265
 servoMin = 150
 servomax = 600
 
+
+"""
+Map Degree to Pulse
+"""
+d2p = {0: 0, 45: 350, 90: 600, 120: 650 }
+
+
 """
 Define Lengths of Segments
 """
@@ -49,19 +56,40 @@ Angle_A_Temp
 Angle_B  # Elbow servo setting.
 Angle_C
 
+# Pin addresses 
+pinFinger
+pinWrist 
+pinElbow 
+pinShoulder
+pinBase
+pinBaseRotate
+pinGripper
 
-
+"""     
+                  Servo(E) ------Servo(F)
+                 /
+              _-/
+            Servo(D)         
+           /
+          /
+         /
+       Servo(C)
+       /
+      /
+     /
+Servo(A,B)
+"""
   
    """
    Pin Names 
 
-   Pin 0  Finger
-   Pin 2  Wrist
-   Pin 4  Elbow
-   Pin 6  Shoulder
-   Pin 8  Base
-   Pin 12 BaseRotator
-   Pin 15 Gripper
+   Pin 0  Finger       Servo F
+   Pin 2  Wrist        Servo E 
+   Pin 4  Elbow        Servo D
+   Pin 6  Shoulder     Servo C
+   Pin 8  Base         Servo A
+   Pin 12 BaseRotator  ServoB
+
    """
 
 def setup():
@@ -72,7 +100,7 @@ def setup():
     pinShoulder = 6
     pinBase = 8
     pinBaseRotate = 12
-    pinGripper = 15
+    
 
     """
     Object to Control the servo
@@ -123,44 +151,97 @@ if Angle_A < 35:
 
 if not isnan(Angle_A)
     print(Angle_A)
+   
     # ShoulderTilt.write(Angle_A)
+    
+    pwm.setPWM(pinShoulder, 0, d2a[Angle_A])
     delay(1000)
 
 if not isnan(Angle_B) 
 
-    CurrentAngle = ElbowTilt.read();
+    #CurrentAngle = ElbowTilt.read()
 
     if (Angle_B > CurrentAngle):
       
-        print(CurrentAngle);
+        print(CurrentAngle)
         print("< \n", Angle_B)
-        Serial.print(" < ");
-        Serial.println(Angle_B);
+        Serial.print(" < ")
+        Serial.println(Angle_B)
         for i in range( CurrentAngle, Angle_B)
-        for (i = CurrentAngle; i < Angle_B; i = i + 1): //if Angle_B > CurrentAngle.
-        {
+            #if Angle_B > CurrentAngle.
+            # ElbowTilt.write(i);
+            i*=(200/45)
+             pwm.setPWM(pinElbow, 0, d2a[Angle_A])
+             #delay(5)
+    else:
+        print(CurrentAngle)
+        print(">")
+        print(Angle_B)
 
-    ElbowTilt.write(i);
-    delay(5);
-    }//end for CurrentAngle.
+        for i in range(CurrentAngle, Angle_B, -1)
+            i += (200/45)
+            pwm.setPwm(pinElbow, 0, i)
+            #delay(5)
+       
+    
 
-}//end if Angle_B > CurrentAngle.
 
 def reset_servos():
-    # ShoulderTilt.write(65);//was 50.60.35.55
-    delay(2000);
+   
+   """
+   Pins
+   """
+    # delay(2000);
+    # pinFinger = 0
+    # pinWrist = 2
+    # pinElbow = 4
+    # pinShoulder = 6
+    # pinBase = 8
+    # pinBaseRotate = 12
+   
 
-
-    # ElbowTilt.write(90 );//was 60.70.50.90.40.90
-    delay(500);
-
-
+    """
+    Servo A
+    """
     # WristTilt.write(90);//was 60.50.40
-    delay(500);
+    pwm.setPWM(pinBaseRotate, 0, 450)
 
-
+    """
+    Servo B
+    """
     # GripTilt.write(90); //was 40,35,90,20,60.10.45
-    delay(500);
+    delay(500)
+    pwm.setPWM(pinBase, 0, 450)
+
+    """
+    Servo C
+    Shoulder
+    """
+    delay(2000)
+    pwm.setPWM(pinShoulder, 0, 450)
+
+    """
+    Servo D
+    Shoulder
+    """
+
+    delay(2000)
+    pwm.setPWM(pinElbow, 0, 450)
+    """
+    Servo E
+    """
+    delay(2000)
+    pwm.setPWM(pinWrist, 0, 450)
+    """
+    Servo F
+    """
+    delay(2000)
+    pwm.setPWM(pinFinger, 0, 450)
+
+
+
+
+
 # pwm.setPWMFreq(60)
 # while(True):
 #     pwm.setPWM(0,0,servoMin)
@@ -169,6 +250,8 @@ def reset_servos():
 #     time.sleep(1)
 
 
+
+"""""""""
 def setServoPulse(channel, pulse):
     pulseLength = 1000000
     pulseLength /= 60
