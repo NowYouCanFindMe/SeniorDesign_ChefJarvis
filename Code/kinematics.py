@@ -131,58 +131,72 @@ def Special_Calc_Point():
 """
 
 
-  Hypot = sqrt(sq(x1) + sq(y1)) + WristLength
-  A = ElbowLength
-  B = Hypot
-  C = ShoulderLength
+	Hypot = sqrt(sq(x1) + sq(y1)) + WristLength
+	A = ElbowLength
+	B = Hypot
+	C = ShoulderLength
 
 
-Angle_A = acos((sq(B) + sq(C) - sq(A)) / (2 * B * C)) * (180 / PI)
+	Angle_A = acos((sq(B) + sq(C) - sq(A)) / (2 * B * C)) * (180 / PI)
 
-Angle_B =  acos((sq(C) + sq(A) - sq(B)) / (2 * A * C)) * (180 / PI)
+	Angle_B =  acos((sq(C) + sq(A) - sq(B)) / (2 * A * C)) * (180 / PI)
 
-Angle_C = acos((sq(A) + sq(B) - sq(C)) / (2 * A * B)) * (180 / PI)
+	Angle_C = acos((sq(A) + sq(B) - sq(C)) / (2 * A * B)) * (180 / PI)
 
-Angle_A = Angle_A * (1 + (Angle_A / (Angle_B + Angle_C)))
+	Angle_A = Angle_A * (1 + (Angle_A / (Angle_B + Angle_C)))
 
 
-if Angle_A < 35:
-    Angle_A = 35
+	if Angle_A < 35:
+	    Angle_A = 35
 
-if not isnan(Angle_A)
-    print(Angle_A)
-   
-    # ShoulderTilt.write(Angle_A)
-    
-    pwm.setPWM(pinShoulder, 0, d2a[Angle_A])
-    delay(1000)
+	if not isnan(Angle_A):
+	    print(Angle_A)
+	   
+	    # ShoulderTilt.write(Angle_A)
+	    
+	    pwm.setPWM(pinShoulder, 0, d2a[Angle_A])
+	    delay(1000)
 
-if not isnan(Angle_B) 
+	if not isnan(Angle_B):
 
-    #CurrentAngle = ElbowTilt.read()
+	    #CurrentAngle = ElbowTilt.read()
 
-    if (Angle_B > CurrentAngle):
-      
-        print(CurrentAngle)
-        print("< \n", Angle_B)
-        Serial.print(" < ")
-        Serial.println(Angle_B)
-        for i in range( CurrentAngle, Angle_B)
-            #if Angle_B > CurrentAngle.
-            # ElbowTilt.write(i);
-            i*=(200/45)
-             pwm.setPWM(pinElbow, 0, d2a[Angle_A])
-             #delay(5)
-    else:
-        print(CurrentAngle)
-        print(">")
-        print(Angle_B)
+	    if (Angle_B > CurrentAngle):
+	      
+		print(CurrentAngle)
+		print("< \n", Angle_B)
+		Serial.print(" < ")
+		Serial.println(Angle_B)
+		for i in range( CurrentAngle, Angle_B)
+		    #if Angle_B > CurrentAngle.
+		    # ElbowTilt.write(i);
+		    i*=(200/45)
+		     pwm.setPWM(pinElbow, 0, d2a[Angle_A])
+		     #delay(5)
+	    else:
+		print(CurrentAngle)
+		print(">")
+		print(Angle_B)
 
-        for i in range(CurrentAngle, Angle_B, -1)
-            i += (200/45)
-            pwm.setPwm(pinElbow, 0, i)
-            #delay(5)
-       
+		for i in range(CurrentAngle, Angle_B, -1)
+		    i += (200/45)
+		    pwm.setPWM(pinElbow, 0, i)
+		    #delay(5)
+	if not isnan(Angle_C):
+		# CurrentAngle = WristTilt.read()
+		
+		if Angle_C > CurrentAngle: 
+			print(CurrentAngle)
+			print(" < ")
+			print(Angle_C)
+			
+			for i in range(CurrentAngle, Angle_C)
+				pwm.setPWM(pinWrist, 0, i)
+				print("New angle: ", i)
+			
+			
+
+	       
     
 
 
