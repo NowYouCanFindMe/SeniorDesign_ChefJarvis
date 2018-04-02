@@ -252,6 +252,8 @@ def Special_Calc_Point():
                 #wrist
                 cycle = duty_cycle(i)
                 pwm.setPWM(3,0,cycle)
+				pwm.setPWM(0,0,150)
+				pwm.setPWM(0,2,150)
                 #print(i)
                 time.sleep(0.23)
          
