@@ -1,3 +1,9 @@
+# Team Members: 
+Yi Si
+Malcolm Carter
+Temesgen Gebregziabher
+Robert Mwaniki
+
 # Objective: 
 The objective is to define a project that will showcase the teams’ electrical and computer engineering skillsets, by targeting a key issue which incorporates the use of analog, digital and programming. 
 
