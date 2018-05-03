@@ -1,7 +1,7 @@
 # Team Members: 
-Yi Si
-Malcolm Carter
-Temesgen Gebregziabher
+Yi Si |
+Malcolm Carter |
+Temesgen Gebregziabher |
 Robert Mwaniki
 
 # Objective: 
